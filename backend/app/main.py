@@ -4,11 +4,24 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from app.middleware import log_requests
 from app.routers import auth, resume, applications, ai, analytics, admin
 
+import subprocess
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Run migrations on startup
+    subprocess.run(["alembic", "upgrade", "head"], check=True)
+    yield
+
 app = FastAPI(title="AI Job Tracker API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://your-app.vercel.app",   # add after Vercel deploy
+        "https://*.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
