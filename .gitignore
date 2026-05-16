@@ -1,0 +1,35 @@
+# Python
+venv/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+build/
+dist/
+
+# Database
+*.sqlite3
+*.db
+
+# Node / Next
+/frontend/.next/
+/frontend/node_modules/
+/frontend/.env.local
+/frontend/.turbo/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+
+# Uploads
+backend/uploads/
+
+# Logs
+*.log
